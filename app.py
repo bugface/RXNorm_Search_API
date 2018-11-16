@@ -4,6 +4,13 @@ from config import input_file, ndc_col, output_file, json_output
 import argparse
 
 
+def rxcui2ingredient():
+    pass
+
+
+def
+
+
 def main():
     # arguments
     arg_parser = argparse.ArgumentParser(description='process input files, column names, outputs and models')

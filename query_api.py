@@ -12,37 +12,36 @@ FORMAT = '%(asctime)-15s %(message)s'
 logging.basicConfig(format=FORMAT)
 logger = logging.getLogger('query_api')
 logger.setLevel(logging.DEBUG)
-headers = {'Accept':'application/json'}
-cache_size = 2**12
+headers = {'Accept': 'application/json'}
+cache_size = 2**10
 query_sleep_time = 0.05
 except_sleep_time = 60
 
 
 def process_responce(rep):
     if rep.status_code == 200:
-        return rep.text # json.loads(rep.text)
+        # json.loads(rep.text)
+        return rep.text
 
 
 def find_ingradient(info):
+    ingrads, ingrad_rxcui = None, None
     try:
         for each in info['allRelatedGroup']['conceptGroup']:
             if each['tty'] == "IN":
                 for e in each['conceptProperties']:
                     ingrads = e['name']
                     ingrad_rxcui = e['rxcui']
-        return ingrads, ingrad_rxcui
     except Exception as ex:
         logger.error(ex)
         return None, None
+    return ingrads, ingrad_rxcui
 
 
 def find_schedule(props):
-    # try:
     for each in props['propConceptGroup']['propConcept']:
         if each['propName'] == 'SCHEDULE':
             return each['propValue']
-    # except Exception as e:
-    #     logger.error(e)
 
 
 def format_rxcui_properties(data):

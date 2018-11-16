@@ -19,7 +19,7 @@ def process_excel(file_name, col_name):
 
 
 def output_tsv(file, data, headers=[]):
-    with open(file, "w", encoding="utf-8", newline="", ) as fw:
+    with open(file, "w", encoding="utf-8", newline="") as fw:
         writer = csv.DictWriter(fw, fieldnames=headers, delimiter="\t")
         writer.writeheader()
         writer.writerows(data)
@@ -32,8 +32,6 @@ def output_json(file, data):
 
 def load_csv(file_name, col_name):
     df = pd.read_csv(file_name, encoding='utf8', dtype=str)
-
-
 
 
 def test():
